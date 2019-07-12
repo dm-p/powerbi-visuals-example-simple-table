@@ -1,0 +1,21 @@
+{
+    "dataRoles": [
+        {
+            "name": "values",
+            "kind": "GroupingOrMeasure",
+            "displayName": "Values"
+        }
+    ],
+    "objects": { },
+    "dataViewMappings": [
+        {
+            "table": {
+                "rows": {
+                    "for": {
+                        "in": "values"
+                    }
+                }
+            }
+        }
+    ]
+}
