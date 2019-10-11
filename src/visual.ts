@@ -13,6 +13,7 @@ import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnume
 
 import { VisualSettings } from './settings';
 import * as d3select from 'd3-selection';
+import Tabulator from './../node_modules/tabulator-tables';
 
 export class Visual implements IVisual {
     private settings: VisualSettings;
