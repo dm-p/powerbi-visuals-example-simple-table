@@ -6,7 +6,18 @@
             "displayName": "Values"
         }
     ],
-    "objects": { },
+    "objects": { 
+        "tabulatorPersistentConfig": {
+            "displayName": "Tabulator Persistent Configuration",
+            "properties": {
+                "columnWidths": {
+                    "type": {
+                        "text": true
+                    }
+                }
+            }
+        }
+    },
     "dataViewMappings": [
         {
             "table": {
