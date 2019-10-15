@@ -14,16 +14,18 @@ import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnume
 import { VisualSettings } from './settings';
 import * as d3select from 'd3-selection';
 
+import * as jQuery from 'jquery';
+var dt = require('datatables.net')();
+
 export class Visual implements IVisual {
     private settings: VisualSettings;
     private container: d3.Selection<any, any, any, any>;
-
+    
     constructor(options: VisualConstructorOptions) {
         console.log('Visual constructor', options);
         /** Visual container */
             this.container = d3select.select(options.element)
-                .append('div')
-                    .append('table');
+                .append('div');
     }
 
     public update(options: VisualUpdateOptions) {
@@ -49,9 +51,15 @@ export class Visual implements IVisual {
         /** If we get this far, we can trust that we can work with the data! */
             let table = dataViews[0].table;
 
+        /** Add table element */
+            let tContainer = this.container
+                .append('table')
+                    .attr('id', 'example-table');
+
         /** Add table heading row and columns */
-            let tHead = this.container
-                .append('tr');
+            let tHead = tContainer
+                .append('thead')
+                    .append('tr');
             table.columns.forEach(
                 (col) => {
                     tHead
@@ -60,10 +68,14 @@ export class Visual implements IVisual {
                 }
             );
 
+        /** Add table body */
+            let tBody = tContainer
+                .append('tbody');
+
         /** Now add rows and columns for each row of data */
             table.rows.forEach(
                 (row) => {
-                    let tRow = this.container
+                    let tRow = tBody
                         .append('tr');
                     row.forEach(
                         (col) => {
@@ -74,7 +86,17 @@ export class Visual implements IVisual {
                     )
                 }
             );
-            console.log('Table rendered!');
+
+        /** Render with datatables */
+            jQuery(() => {
+                console.log('Drawing...');
+                jQuery(tContainer.node()).DataTable({
+                    searching: false,
+                    paging: false,
+                    scrollY: `${options.viewport.height}`
+                });
+                console.log('Table rendered!');
+            });
         
     }
 
