@@ -13,6 +13,7 @@ import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnume
 
 import { VisualSettings } from './settings';
 import * as d3select from 'd3-selection';
+var Tabulator = require('tabulator-tables');
 
 export class Visual implements IVisual {
     private settings: VisualSettings;
@@ -24,6 +25,7 @@ export class Visual implements IVisual {
             this.container = d3select.select(options.element)
                 .append('div')
                     .append('table');
+
     }
 
     public update(options: VisualUpdateOptions) {
